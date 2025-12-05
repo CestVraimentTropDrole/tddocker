@@ -1,0 +1,32 @@
+name: c_todoapp
+services:
+    mariadb:
+        environment:
+            - MARIADB_USER=${USER_NAME}
+            - MARIADB_DATABASE=${DB_NAME}
+            - MARIADB_PASSWORD=${PASSWORD}
+            - MARIADB_ROOT_PASSWORD=${ROOT_PASSWORD}
+        volumes:
+            - ${pwd}/db_data:/var/lib/mysql
+        ports:
+            - 3306:3306
+        image: mariadb
+    phpmyadmin:
+        environment:
+            - PMA_ARBITRARY=1
+        ports:
+            - ${PORT_SITE}:80
+        image: phpmyadmin
+    monapache:
+        environment:
+            - SERVER_DB=mariadb
+            - USER_NAME=${USER_NAME}
+            - PASSWORD=${PASSWORD}
+            - DB_NAME=${DB_NAME}
+        ports:
+            - ${PORT_APACHE}:80
+        volumes:
+            - ${pwd}:/var/www/html
+        image: monapache
+        depends_on:
+            - mariadb

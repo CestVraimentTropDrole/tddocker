@@ -1,0 +1,9 @@
+SERVER_DB=c_mariadb
+USER_NAME=username
+PASSWORD=password
+DB_NAME=todo_app
+
+ROOT_PASSWORD=rootpassword
+
+PORT_SITE=8080
+PORT_APACHE=80
