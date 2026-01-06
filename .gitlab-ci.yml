@@ -1,0 +1,15 @@
+image: ubuntu:latest
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  when: manual
+  before_script:
+  - 'which ssh-agent || ( apt update -y && apt install openssh-client -y )'
+  - mkdir -p ~/.ssh
+  - eval $(ssh-agent -s)
+  script:
+    - ssh-add <(echo "$SSH_KEY")
+    - ssh -o StrictHostKeyChecking=no  "$SSH_USER"@"$SSH_HOST" "cd $WORKDIR && git pull"
