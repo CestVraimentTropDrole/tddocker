@@ -64,5 +64,7 @@ $tasks = $conn->query("SELECT * FROM tasks ORDER BY created_at DESC")->fetchAll(
             </tbody>
         </table>
     <?php endif; ?>
+
+    <p>Bravo le pipeline fonctionne 👍</p>
 </body>
 </html>
